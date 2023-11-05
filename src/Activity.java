@@ -5,6 +5,7 @@ public class Activity implements Comparable<Activity> {
     private double distance;
     private int averageHeartRate;
     IntensityState intensity;
+    private double intensityValue;
 
     //constructors
     public Activity() {
@@ -66,39 +67,61 @@ public class Activity implements Comparable<Activity> {
     public IntensityState calcIntensity(){
         IntensityState intensity;
         double kph = distance/(Math.round((double)duration/60));
-        double[] swimming ={0.5,1.25,2,2.75,3.5};
-        double[] running ={4,8,12,16,24};
-        double[] cycling ={8,16,25,33,40};
+        double[] swimmingA ={0.5,1.25,2,2.75,3.5};
+        double[] swimmingB ={5,6.3,7.6,8.9,10.2};
 
-        double[] choice = new double[5];
+        double[] runningA ={4,8,12,16,24};
+        double[] runningB ={4.1,7.2,10,15.4,20.8};
+
+        double[] cyclingA ={8,16,25,33,40};
+        double[] cyclingB ={2,5,7,13,15};
+
+        double[] choiceA = new double[5];
+        double[] choiceB = new double[5];
 
         switch (type){
-            case "Swimming" -> System.arraycopy(swimming,0,choice,0,swimming.length);
-            case "Running" -> System.arraycopy(running,0,choice,0,swimming.length);
-            case "Cycling" -> System.arraycopy(cycling,0,choice,0,swimming.length);
+            case "Swimming":
+                System.arraycopy(swimmingA,0,choiceA,0,swimmingA.length);
+                System.arraycopy(swimmingB,0,choiceB,0,swimmingB.length);
+            break;
+            case "Running" :
+                System.arraycopy(runningA,0,choiceA,0,runningA.length);
+                System.arraycopy(runningB,0,choiceB,0,runningB.length);
+            break;
+            case "Cycling" :
+                System.arraycopy(cyclingA,0,choiceA,0,swimmingA.length);
+                System.arraycopy(cyclingB,0,choiceB,0,swimmingB.length);
+            break;
         }
 
-        if(kph<choice[0]){
+        if(kph<choiceA[0]){
+            intensityValue = choiceB[0];
             return intensity = IntensityState.VERY_LIGHT;
         }
-        else if(kph>choice[0]&& kph < choice[1]){
+        else if(kph>choiceA[0]&& kph < choiceA[1]){
+            intensityValue = choiceB[1];
             return intensity = IntensityState.LIGHT;
         }
-        else if(kph>choice[1]&& kph <choice[2]){
+        else if(kph>choiceA[1]&& kph <choiceA[2]){
+            intensityValue = choiceB[2];
             return intensity = IntensityState.MODERATE;
         }
-        else if(kph>choice[2]&& kph <choice[3]){
+        else if(kph>choiceA[2]&& kph <choiceA[3]){
+            intensityValue = choiceB[3];
             return intensity = IntensityState.VIGOROUS;
         }
-        else if(kph>choice[3]&& kph <choice[4]){
+        else if(kph>choiceA[3]&& kph <choiceA[4]){
+            intensityValue = choiceB[4];
             return intensity = IntensityState.VERY_VIGOROUS;
         }
         else{
             return null;
         }
-
     }
 
+    public double calcCaloriesBurned(){
+        return intensityValue*duration;
+    }
 
     @Override
     public String toString() {
