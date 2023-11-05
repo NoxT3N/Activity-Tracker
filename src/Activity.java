@@ -1,9 +1,10 @@
-public class Activity {
+public class Activity implements Comparable<Activity> {
     private String type;
     private int duration;
     private String date;
     private double distance;
     private int averageHeartRate;
+    IntensityState intensity;
 
     //constructors
     public Activity() {
@@ -15,6 +16,7 @@ public class Activity {
         this.date = date;
         this.distance = distance;
         this.averageHeartRate = averageHeartRate;
+        this.intensity = calcIntensity();
     }
 
     //getters
@@ -61,6 +63,42 @@ public class Activity {
         this.averageHeartRate = averageHeartRate;
     }
 
+    public IntensityState calcIntensity(){
+        IntensityState intensity;
+        double[] swimming ={0.5,1.25,2,2.75,3.5};
+        double[] running ={4,8,12,16,24};
+        double[] cycling ={8,16,25,33,40};
+
+        double[] choice = new double[5];
+
+        switch (type){
+            case "Swimming" -> System.arraycopy(swimming,0,choice,0,swimming.length);
+            case "Running" -> System.arraycopy(running,0,choice,0,swimming.length);
+            case "Cycling" -> System.arraycopy(cycling,0,choice,0,swimming.length);
+        }
+
+        if(distance<choice[0]){
+            return intensity = IntensityState.VERY_LIGHT;
+        }
+        else if(distance>choice[0]&& distance < choice[1]){
+            return intensity = IntensityState.LIGHT;
+        }
+        else if(distance>choice[1]&& distance <choice[2]){
+            return intensity = IntensityState.MODERATE;
+        }
+        else if(distance>choice[2]&& distance <choice[3]){
+            return intensity = IntensityState.VIGOROUS;
+        }
+        else if(distance>choice[3]&& distance <choice[4]){
+            return intensity = IntensityState.VERY_VIGOROUS;
+        }
+        else{
+            return null;
+        }
+
+    }
+
+
     @Override
     public String toString() {
         return "Activity{" +
@@ -82,6 +120,10 @@ public class Activity {
                 date.equals(activity.date) &&
                 distance == activity.distance &&
                 averageHeartRate == activity.averageHeartRate;
+    }
+    @Override
+    public int compareTo(Activity a){
+        return this.duration - a.duration;
     }
 
 }
