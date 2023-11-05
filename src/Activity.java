@@ -65,6 +65,7 @@ public class Activity implements Comparable<Activity> {
 
     public IntensityState calcIntensity(){
         IntensityState intensity;
+        double kph = distance/(Math.round((double)duration/60));
         double[] swimming ={0.5,1.25,2,2.75,3.5};
         double[] running ={4,8,12,16,24};
         double[] cycling ={8,16,25,33,40};
@@ -77,19 +78,19 @@ public class Activity implements Comparable<Activity> {
             case "Cycling" -> System.arraycopy(cycling,0,choice,0,swimming.length);
         }
 
-        if(distance<choice[0]){
+        if(kph<choice[0]){
             return intensity = IntensityState.VERY_LIGHT;
         }
-        else if(distance>choice[0]&& distance < choice[1]){
+        else if(kph>choice[0]&& kph < choice[1]){
             return intensity = IntensityState.LIGHT;
         }
-        else if(distance>choice[1]&& distance <choice[2]){
+        else if(kph>choice[1]&& kph <choice[2]){
             return intensity = IntensityState.MODERATE;
         }
-        else if(distance>choice[2]&& distance <choice[3]){
+        else if(kph>choice[2]&& kph <choice[3]){
             return intensity = IntensityState.VIGOROUS;
         }
-        else if(distance>choice[3]&& distance <choice[4]){
+        else if(kph>choice[3]&& kph <choice[4]){
             return intensity = IntensityState.VERY_VIGOROUS;
         }
         else{
