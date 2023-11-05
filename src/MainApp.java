@@ -8,9 +8,11 @@ public class MainApp {
 
         ArrayList<Activity> activities = reader.activitiesList;
 
-        for (Activity a:activities) {
+        /*for (Activity a:activities) {
             System.out.println(a.toString());
-        }
+        }*/
+
+        System.out.println("\n"+activities.size());
 
     }
 }

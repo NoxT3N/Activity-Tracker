@@ -82,10 +82,16 @@ public class activityReader {
                 double distance = Double.parseDouble(tokens[3]);
                 int heartRate = Integer.parseInt(tokens[4]);
 
+                Activity activity = new Activity(type,duration,date,distance,heartRate);
+                if(!activitiesList.contains(activity)){
+                    activitiesList.add(activity);
+                }
+
 //                System.out.println(type + date + duration + distance + heartRate);
                 //System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,date,duration,distance,heartRate);
 
-                this.activitiesList.add(new Activity(type,duration,date,distance,heartRate));
+                //this.activitiesList.add(new Activity(type,duration,date,distance,heartRate));
+
 
             }
 
