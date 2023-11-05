@@ -72,16 +72,16 @@ public class activityReader {
 
             while (fileReader.hasNextLine()) {
                 String line = fileReader.nextLine();
-                String [] tokens = line.split(",");
+                String [] tokens = line.split(", ");
 
                 String type = tokens [0];
                 String date = tokens [1];
-                double duration = Double.parseDouble(tokens[2]);
+                int duration = Integer.parseInt(tokens[2]);
                 double distance = Double.parseDouble(tokens[3]);
-                double heartRate = Double.parseDouble(tokens[4]);
+                int heartRate = Integer.parseInt(tokens[4]);
 
 //                System.out.println(type + date + duration + distance + heartRate);
-                System.out.printf("%-20s %5s %5.2f %5.2f %5.2f %n",type,date,duration,distance,heartRate);
+                System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,date,duration,distance,heartRate);
             }
 
         } catch (FileNotFoundException e) {

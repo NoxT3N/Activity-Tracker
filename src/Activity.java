@@ -3,13 +3,13 @@ public class Activity {
     private double duration;
     private String date;
     private double distance;
-    private double averageHeartRate;
+    private int averageHeartRate;
 
     //constructors
     public Activity() {
     }
 
-    public Activity(String type, double duration, String date, double distance, double averageHeartRate) {
+    public Activity(String type, double duration, String date, double distance, int averageHeartRate) {
         this.type = type;
         this.duration = duration;
         this.date = date;
@@ -53,11 +53,11 @@ public class Activity {
         this.distance = distance;
     }
 
-    public double getAverageHeartRate() {
+    public int getAverageHeartRate() {
         return averageHeartRate;
     }
 
-    public void setAverageHeartRate(double averageHeartRate) {
+    public void setAverageHeartRate(int averageHeartRate) {
         this.averageHeartRate = averageHeartRate;
     }
 
