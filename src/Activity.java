@@ -71,4 +71,17 @@ public class Activity {
                 ", averageHeartRate=" + averageHeartRate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if ( o == null || getClass() != o.getClass()) return false;
+        Activity activity  = (Activity) o;
+        return type.equals(activity.type) &&
+                duration == activity.duration &&
+                date.equals(activity.date) &&
+                distance == activity.distance &&
+                averageHeartRate == activity.averageHeartRate;
+    }
+
 }
