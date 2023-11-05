@@ -1,6 +1,6 @@
 public class Activity {
     private String type;
-    private double duration;
+    private int duration;
     private String date;
     private double distance;
     private int averageHeartRate;
@@ -9,7 +9,7 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String type, double duration, String date, double distance, int averageHeartRate) {
+    public Activity(String type, int duration, String date, double distance, int averageHeartRate) {
         this.type = type;
         this.duration = duration;
         this.date = date;
@@ -31,7 +31,7 @@ public class Activity {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(int duration) {
         this.duration = duration;
     }
 

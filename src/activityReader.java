@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 //import java.time.LocalDate;
 //import java.time.format.DateTimeFormatter;
@@ -11,6 +12,7 @@ public class activityReader {
     private String filename;
     private File activities = new File("src/activities");
     private File[] listOfFiles = activities.listFiles();
+    public ArrayList<Activity> activitiesList = new ArrayList<>();
 
     public void namePicker(){
         filename = "src/activities/" +listOfFiles[fileChoice].getName();
@@ -81,7 +83,10 @@ public class activityReader {
                 int heartRate = Integer.parseInt(tokens[4]);
 
 //                System.out.println(type + date + duration + distance + heartRate);
-                System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,date,duration,distance,heartRate);
+                //System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,date,duration,distance,heartRate);
+
+                this.activitiesList.add(new Activity(type,duration,date,distance,heartRate));
+
             }
 
         } catch (FileNotFoundException e) {
