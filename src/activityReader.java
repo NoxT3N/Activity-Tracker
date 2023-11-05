@@ -18,10 +18,9 @@ public class activityReader {
         filename = "src/activities/" +listOfFiles[fileChoice].getName();
     }
 
-
+// fileList runs through the contents of the 'activities' folder and prints them out, which is where csv files are stored.
     public void fileList() {
 //code to read folder from: https://stackoverflow.com/questions/5694385/getting-the-filenames-of-all-files-in-a-folder
-
 
         numFiles = listOfFiles.length;
 
@@ -59,7 +58,7 @@ public class activityReader {
         } while (choice > numFiles || choice <= 0);
 
         namePicker();
-        System.out.println(filename);
+//        System.out.println(filename);
         activity();
     }
 
