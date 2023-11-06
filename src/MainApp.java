@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class MainApp {
@@ -18,7 +17,7 @@ public class MainApp {
         return total/count;
     }
 
-    public static double calories(ArrayList<Activity> activities) {
+    public static double avgCalories(ArrayList<Activity> activities) {
         double total = 0;
 
         for (Activity act : activities) {
@@ -42,19 +41,24 @@ public class MainApp {
 
 
         String[] types = {"Swimming", "Running", "Cycling"};
-        for(String type: types)
-        {
-            System.out.println(type +" " + avgDistance(activities, type));
+        String[] pastTypes = {"swam", "ran", "cycled"};
+//        for(String type: types)
+//        {
+//            System.out.println(type +" " + avgDistance(activities, type));
+//        }
+
+        for (int i = 0; i < types.length; i++) {
+            System.out.printf("You have " + pastTypes[i] +" an average distance of %.2f km in this set.\n", avgDistance(activities, types[i]) );
         }
 
-        System.out.println("You have burned " + calories(activities) + " calories on average in this set.");
+        System.out.println("You have burned " + avgCalories(activities) + " calories on average in this set.");
 
 
 //        for (Activity a:activities) {
 //            System.out.println(a.toString());
 //        }
-
-        System.out.println("\n"+activities.size());
+//
+//        System.out.println("\n"+activities.size());
 
     }
 }

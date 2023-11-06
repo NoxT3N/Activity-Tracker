@@ -2,8 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-//import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
 
 public class activityReader {
 
@@ -13,10 +11,6 @@ public class activityReader {
     private File activities = new File("src/activities");
     private File[] listOfFiles = activities.listFiles();
     public ArrayList<Activity> activitiesList = new ArrayList<>();
-
-    public void namePicker(){
-        filename = "src/activities/" +listOfFiles[fileChoice].getName();
-    }
 
 // fileList runs through the contents of the 'activities' folder and prints them out, which is where csv files are stored.
     public void fileList() {
@@ -35,12 +29,11 @@ public class activityReader {
         }
     }
 
-
+// userChoice works as a menu system. It takes in the user's choice of file.
     public void userChoice () {
         Scanner keyboard = new Scanner(System.in);
         String userInput = "-1";
         int choice = Integer.parseInt(userInput);
-
 
         System.out.println("Please choose a file number");
         do  {
@@ -57,12 +50,12 @@ public class activityReader {
             }
         } while (choice > numFiles || choice <= 0);
 
-        namePicker();
-//        System.out.println(filename);
+        filename = "src/activities/" +listOfFiles[fileChoice].getName();
         activity();
     }
 
 
+    //activity reads the user's chosen csv file. It then creates an activity object for each entry. It also checks for duplicates for each entry in the arraylist.
     public void activity() {
 // code to read csv files: https://github.com/logued/oop-csv-read-text-file/blob/master/src/main/java/org/example/Main.java
 
@@ -87,9 +80,9 @@ public class activityReader {
                 }
 
 //                System.out.println(type + date + duration + distance + heartRate);
-                //System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,date,duration,distance,heartRate);
-
-                //this.activitiesList.add(new Activity(type,duration,date,distance,heartRate));
+//                System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,date,duration,distance,heartRate);
+//
+//                this.activitiesList.add(new Activity(type,duration,date,distance,heartRate));
 
 
             }
