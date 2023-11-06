@@ -19,12 +19,26 @@ public class MainApp {
 
     public static double avgCalories(ArrayList<Activity> activities) {
         double total = 0;
+//
+//        for (Activity act : activities) {
+//            double calBurned = act.calcCaloriesBurned();
+////            total =+ calBurned;
+//            total = total + calBurned;
+//
+//        }
 
-        for (Activity act : activities) {
-            double calBurned = act.calcCaloriesBurned();
-//            total =+ calBurned;
-            total = total + calBurned;
-
+        for (Activity act: activities) {
+            double calBurned = 0;
+            if(act instanceof Swimming){
+                calBurned = ((Swimming) act).calcCaloriesBurned();
+            }
+            else if(act instanceof Running){
+                calBurned = ((Running) act).calcCaloriesBurned();
+            }
+            else if(act instanceof Cycling){
+                calBurned = ((Cycling) act).calcCaloriesBurned();
+            }
+            total += calBurned;
         }
 
         return total/activities.size();
