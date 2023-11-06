@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
 public class averageCalc {
-    activityReader reader = new activityReader();
+    ArrayList<Activity> activities ;
 
-    ArrayList<Activity> activities = reader.activitiesList;
-
+    public averageCalc(ArrayList<Activity> act)
+    {
+        activities = act;
+    }
 
         /*for (Activity a:activities) {
             System.out.println(a.toString());
