@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainApp {
 
@@ -107,6 +109,21 @@ public class MainApp {
 //        }
 //
 //        System.out.println("\n"+activities.size());
+
+        System.out.println("\nBEFORE SORT\n");
+        for (Activity a:activities) {
+            System.out.println(a.toString());
+        }
+        TypeComparator tCompare = new TypeComparator();
+        Collections.sort(activities,tCompare);
+        //Collections.reverse(activities);
+        System.out.println("\nAFTER SORT\n");
+
+        for (Activity a:activities) {
+            System.out.println(a.toString());
+        }
+
+
 
     }
 

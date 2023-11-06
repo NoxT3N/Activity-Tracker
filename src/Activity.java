@@ -4,6 +4,8 @@ public class Activity implements Comparable<Activity> {
     protected String date;
     protected double distance;
     protected int averageHeartRate;
+    public double caloriesBurned;
+
     //IntensityState intensity;
     //protected double intensityValue;
 
