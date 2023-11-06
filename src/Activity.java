@@ -30,7 +30,7 @@ public class Activity implements Comparable<Activity> {
         this.type = type;
     }
 
-    public double getDuration() {
+    public int getDuration() {
         return duration;
     }
 
