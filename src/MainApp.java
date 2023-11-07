@@ -20,6 +20,11 @@ public class MainApp {
         return total/count;
     }
 
+    public static void displayAll(ArrayList<Activity>activities){
+        for (Activity a:activities) {
+            System.out.println(a.toString());
+        }
+    }
     public static double avgCalories(ArrayList<Activity> activities) {
         double total = 0;
 
@@ -76,6 +81,9 @@ public class MainApp {
                 CaloriesComparator calCompare = new CaloriesComparator();
                 Collections.sort(activities,calCompare);
             break;
+            case "duration":
+                Collections.sort(activities);
+            break;
         }
 
         if(!asc){
@@ -113,9 +121,20 @@ public class MainApp {
         aboveDistance(activities);
 
         aboveDuration(activities);
-//        for (Activity a:activities) {
-//            System.out.println(a.toString());
-//        }
+
+        System.out.println("\nBEFORE SORTING\n");
+        displayAll(activities);
+
+        DateComparator dateCompare = new DateComparator();
+
+        Collections.sort(activities,dateCompare);
+        Collections.reverse(activities);
+        System.out.println("\nAFTER SORTING\n");
+        displayAll(activities);
+
+
+
+
 //
 //        System.out.println("\n"+activities.size());
 

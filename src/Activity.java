@@ -42,27 +42,33 @@ public class Activity implements Comparable<Activity> {
         return date;
     }
 
-    //setters
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public double getDistance() {
         return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
     }
 
     public int getAverageHeartRate() {
         return averageHeartRate;
     }
 
+    public IntensityState getIntensity() {
+        return intensity;
+    }
+
+    //setters
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     public void setAverageHeartRate(int averageHeartRate) {
         this.averageHeartRate = averageHeartRate;
     }
+
+    
 
     public void calcIntensity(){
         IntensityState intensity;
