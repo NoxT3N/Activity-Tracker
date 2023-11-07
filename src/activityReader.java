@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class activityReader {
-
-    private int numFiles= 0;
     private int fileChoice;
     private String filename;
-    private File activities = new File("src/activities");
-    private File[] listOfFiles = activities.listFiles();
+    private File actFolder = new File("src/activities");
+    private File[] listOfFiles = actFolder.listFiles();
+    public String userInput = "-1";
     public ArrayList<Activity> activitiesList = new ArrayList<>();
 
-// fileList runs through the contents of the 'activities' folder and prints them out, which is where csv files are stored.
+    // fileList runs through the contents of the 'activities' folder and prints them out, which is where csv files are stored.
     public void fileList() {
 //code to read folder from: https://stackoverflow.com/questions/5694385/getting-the-filenames-of-all-files-in-a-folder
-
-        numFiles = listOfFiles.length;
 
         for (int i = 0; i < listOfFiles.length; i++) {
 
@@ -30,27 +27,47 @@ public class activityReader {
     }
 
 // userChoice works as a menu system. It takes in the user's choice of file.
+//    public void userChoice () {
+//        Scanner keyboard = new Scanner(System.in);
+//        int choice = Integer.parseInt(userInput);
+//
+//        System.out.println("Please choose a file number");
+//        do  {
+//            try {
+//                userInput = keyboard.nextLine();
+//                choice = Integer.parseInt(userInput);
+//                fileChoice = choice-1;
+//                if(choice > numFiles || choice <= 0){
+//                    System.out.println(choice + " is not a valid file number, please choose a valid file.");
+//                }
+//
+//            } catch (Exception e){
+//                System.out.println(userInput + " is not a number, please try again.");
+//            }
+//        } while (choice > numFiles || choice <= 0);
+//
+//        filename = "src/activities/" +listOfFiles[fileChoice].getName();
+//        activity();
+//    }
+
     public void userChoice () {
-        Scanner keyboard = new Scanner(System.in);
-        String userInput = "-1";
         int choice = Integer.parseInt(userInput);
 
-        System.out.println("Please choose a file number");
         do  {
             try {
-                userInput = keyboard.nextLine();
                 choice = Integer.parseInt(userInput);
                 fileChoice = choice-1;
-                if(choice > numFiles || choice <= 0){
+                if(choice > listOfFiles.length || choice <= 0){
                     System.out.println(choice + " is not a valid file number, please choose a valid file.");
                 }
 
             } catch (Exception e){
                 System.out.println(userInput + " is not a number, please try again.");
             }
-        } while (choice > numFiles || choice <= 0);
+        } while (choice > listOfFiles.length || choice <= 0);
 
         filename = "src/activities/" +listOfFiles[fileChoice].getName();
+        System.out.println("File chosen: "+ filename);
         activity();
     }
 

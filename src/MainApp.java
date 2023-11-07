@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class MainApp {
 
     public static double minDistance = 6.00;
     public static int minDuration = 60;
+    public static ArrayList<Activity> activities;
     public static double avgDistance(ArrayList<Activity> activities, String type) {
 
         int count = 0;
@@ -20,11 +22,6 @@ public class MainApp {
         return total/count;
     }
 
-    public static void displayAll(ArrayList<Activity>activities){
-        for (Activity a:activities) {
-            System.out.println(a.toString());
-        }
-    }
     public static double avgCalories(ArrayList<Activity> activities) {
         double total = 0;
 
@@ -38,33 +35,55 @@ public class MainApp {
 
     }
 
-    public static void typeViewer(ArrayList<Activity> activities, String type){
-        for(Activity act : activities)
-        {
-            if(act.getType().equalsIgnoreCase(type))
-            {
-                System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+    public static void subTypeViewer(ArrayList<Activity> activities, String type, int subType){
+        for(Activity act : activities) {
+
+//            if(act.getType().equalsIgnoreCase(type))
+//            {
+//                System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+//            }
+//            else if(act.getDistance() > minDistance){
+//                System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+//            }
+//            else if(act.getDuration() > minDuration){
+//                System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+//            }
+
+            switch (subType){
+                case 1:
+                    if(act.getType().equalsIgnoreCase(type))
+                    {
+                        System.out.printf("%-20s %5s %5d %5.2f %5d %n",type,act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+                    }
+                case 2:
+                    if(act.getDistance() > minDistance){
+                        System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+                    }
+                case 3:
+                    if(act.getDuration() > minDuration){
+                        System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+                    }
             }
         }
     }
 
-    public static void aboveDistance(ArrayList<Activity> activities){
-        for(Activity act : activities){
-
-            if(act.getDistance() > minDistance){
-                System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
-            }
-        }
-    }
-
-    public static void aboveDuration(ArrayList<Activity> activities){
-        for(Activity act : activities){
-
-            if(act.getDuration() > minDuration){
-                System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
-            }
-        }
-    }
+//    public static void aboveDistance(ArrayList<Activity> activities){
+//        for(Activity act : activities){
+//
+//            if(act.getDistance() > minDistance){
+//                System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+//            }
+//        }
+//    }
+//
+//    public static void aboveDuration(ArrayList<Activity> activities){
+//        for(Activity act : activities){
+//
+//            if(act.getDuration() > minDuration){
+//                System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+//            }
+//        }
+//    }
 
 
     public static void sortBy(ArrayList<Activity>activities,String sortRef,boolean asc){
@@ -72,22 +91,15 @@ public class MainApp {
             case "type":
                 TypeComparator typeCompare = new TypeComparator();
                 Collections.sort(activities,typeCompare);
-            break;
+                break;
             case "distance":
                 DistanceComparator distCompare = new DistanceComparator();
                 Collections.sort(activities,distCompare);
-            break;
+                break;
             case "calories":
                 CaloriesComparator calCompare = new CaloriesComparator();
                 Collections.sort(activities,calCompare);
-            break;
-            case "date":
-                DateComparator dateCompare = new DateComparator();
-                Collections.sort(activities,dateCompare);
-            break;
-            default:
-                Collections.sort(activities);
-            break;
+                break;
         }
 
         if(!asc){
@@ -96,16 +108,30 @@ public class MainApp {
 
     }
 
-
-
-
-    public static void main(String[] args) {
-
+    public static void menu(){
         activityReader reader = new activityReader();
         reader.fileList();
-        reader.userChoice();
-
         ArrayList<Activity> activities = reader.activitiesList;
+        int subType = 1;
+        boolean exit = false;
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Please choose a file number");
+        do  {
+            try {
+                reader.userInput = keyboard.nextLine();
+                reader.userChoice();
+            } catch (Exception e){
+                System.out.println(reader.userInput + " is not a number, please try again.");
+            }
+
+            System.out.println("Please choose what to do with the file:");
+
+        } while (!exit);
+    }
+    public static void main(String[] args) {
+
+        menu();
 
         String[] types = {"Swimming", "Running", "Cycling"};
         String[] pastTypes = {"swam", "ran", "cycled"};
@@ -120,25 +146,14 @@ public class MainApp {
 
         System.out.println("You have burned " + avgCalories(activities) + " calories on average in this set.");
 
-        typeViewer(activities, types[1]);
+//        subTypeViewer(activities, types[1], 1);
 
-        aboveDistance(activities);
-
-        aboveDuration(activities);
-
-        System.out.println("\nBEFORE SORTING\n");
-        displayAll(activities);
-
-        DateComparator dateCompare = new DateComparator();
-
-        Collections.sort(activities,dateCompare);
-        Collections.reverse(activities);
-        System.out.println("\nAFTER SORTING\n");
-        displayAll(activities);
-
-
-
-
+//        aboveDistance(activities);
+//
+//        aboveDuration(activities);
+//        for (Activity a:activities) {
+//            System.out.println(a.toString());
+//        }
 //
 //        System.out.println("\n"+activities.size());
 
