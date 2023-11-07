@@ -24,8 +24,7 @@ public class MainApp {
 
         for (Activity act : activities) {
             double calBurned = act.calcCaloriesBurned();
-//            total =+ calBurned;
-            total = total + calBurned;
+            total += calBurned;
 
         }
 
