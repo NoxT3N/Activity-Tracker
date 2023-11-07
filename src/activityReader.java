@@ -74,7 +74,15 @@ public class activityReader {
                 double distance = Double.parseDouble(tokens[3]);
                 int heartRate = Integer.parseInt(tokens[4]);
 
-                Activity activity = new Activity(type,duration,date,distance,heartRate);
+                Activity activity;
+                switch(type){
+                    case "Swimming" -> activity = new Swimming(type,duration,date,distance,heartRate);
+                    case "Running" -> activity = new Running(type,duration,date,distance,heartRate);
+                    case "Cycling" ->  activity = new Cycling(type,duration,date,distance,heartRate);
+                    default ->  activity = new Activity();
+                }
+
+//                Activity activity = new Activity(type,duration,date,distance,heartRate);
                 if(!activitiesList.contains(activity)){
                     activitiesList.add(activity);
                 }
