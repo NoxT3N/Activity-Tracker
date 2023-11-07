@@ -7,6 +7,12 @@ public class MainApp {
     public static double minDistance = 6.00;
     public static int minDuration = 60;
     public static ArrayList<Activity> activities;
+
+    public void displayAll(){
+        for (Activity a:activities) {
+            System.out.println(a.toString());
+        }
+    }
     public static double avgDistance(ArrayList<Activity> activities, String type) {
 
         int count = 0;
@@ -91,15 +97,22 @@ public class MainApp {
             case "type":
                 TypeComparator typeCompare = new TypeComparator();
                 Collections.sort(activities,typeCompare);
-                break;
+            break;
             case "distance":
                 DistanceComparator distCompare = new DistanceComparator();
                 Collections.sort(activities,distCompare);
-                break;
+            break;
             case "calories":
                 CaloriesComparator calCompare = new CaloriesComparator();
                 Collections.sort(activities,calCompare);
-                break;
+            break;
+            case "date":
+                DateComparator dateCompare = new DateComparator();
+                Collections.sort(activities,dateCompare);
+            break;
+            default:
+                Collections.sort(activities);
+            break;
         }
 
         if(!asc){
@@ -121,6 +134,7 @@ public class MainApp {
             try {
                 reader.userInput = keyboard.nextLine();
                 reader.userChoice();
+                exit = true;
             } catch (Exception e){
                 System.out.println(reader.userInput + " is not a number, please try again.");
             }
