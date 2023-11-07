@@ -81,7 +81,11 @@ public class MainApp {
                 CaloriesComparator calCompare = new CaloriesComparator();
                 Collections.sort(activities,calCompare);
             break;
-            case "duration":
+            case "date":
+                DateComparator dateCompare = new DateComparator();
+                Collections.sort(activities,dateCompare);
+            break;
+            default:
                 Collections.sort(activities);
             break;
         }
