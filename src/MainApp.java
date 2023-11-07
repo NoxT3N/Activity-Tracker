@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainApp {
 
@@ -59,6 +60,31 @@ public class MainApp {
             }
         }
     }
+
+
+    public static void sortBy(ArrayList<Activity>activities,String sortRef,boolean asc){
+        switch(sortRef.toLowerCase()){
+            case "type":
+                TypeComparator typeCompare = new TypeComparator();
+                Collections.sort(activities,typeCompare);
+            break;
+            case "distance":
+                DistanceComparator distCompare = new DistanceComparator();
+                Collections.sort(activities,distCompare);
+            break;
+            case "calories":
+                CaloriesComparator calCompare = new CaloriesComparator();
+                Collections.sort(activities,calCompare);
+            break;
+        }
+
+        if(!asc){
+            Collections.reverse(activities);
+        }
+
+    }
+
+
 
 
     public static void main(String[] args) {
