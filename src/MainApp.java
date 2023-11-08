@@ -192,7 +192,7 @@ public class MainApp {
                         System.out.println("2 - Above a minimum distance");
                         System.out.println("3 - Type of energy expended");
                         System.out.println("4 - Above a minimum duration");
-                        System.out.println("5 - Activity type");
+                        System.out.println("5 - Activity type"); // possibly delete this?
                         System.out.println("0 - Back to Menu\n");
 
                         userInputNum = keyboard.nextInt();
@@ -214,7 +214,7 @@ public class MainApp {
                                 break;
                             case 3:
                                 System.out.println("Enter type of energy");
-                                keyboard.nextLine();
+                                keyboard.nextLine(); //why?
                                 String choice = keyboard.nextLine();
                                 subTypeViewerEnergy(choice);
                             break;

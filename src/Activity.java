@@ -71,7 +71,7 @@ public class Activity implements Comparable<Activity> {
     
 
     public void calcIntensity(){
-        IntensityState intensity;
+        //3IntensityState intensity;
         double kph = distance/(Math.round((double)duration/60));
         double[] swimKPH ={0.5,1.25,2,2.75,3.5};
         double[] swimIntensity ={5,6.3,7.6,8.9,10.2};
@@ -116,7 +116,7 @@ public class Activity implements Comparable<Activity> {
             intensityValue = choiceB[3];
             intensity = IntensityState.VIGOROUS;
         }
-        else if(kph>choiceA[3]&& kph <choiceA[4]){
+        else if(kph>choiceA[3]){
             intensityValue = choiceB[4];
             intensity = IntensityState.VERY_VIGOROUS;
         }
