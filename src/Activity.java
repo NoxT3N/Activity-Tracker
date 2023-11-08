@@ -4,17 +4,12 @@ public class Activity implements Comparable<Activity> {
     private String date;
     private double distance;
     private int averageHeartRate;
-    public IntensityState intensity;
+    IntensityState intensity;
     private double intensityValue;
 
     //constructors
     public Activity() {
     }
-
-//    public Activity(String type, String date) {
-//        this.type = type;
-//        this.date = date;
-//    }
 
     public Activity(String type, int duration, String date, double distance, int averageHeartRate) {
         this.type = type;
