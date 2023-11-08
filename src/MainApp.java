@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class MainApp {
 
-    public static double minDistance = 6.00;
-    public static int minDuration = 60;
+    //public static double minDistance;
+    //public static int minDuration;
     public static ArrayList<Activity> activities;
 
     public static void displayAll(){
@@ -63,17 +63,19 @@ public class MainApp {
         }
     }
 
-    public static void subTypeViewer(int subType){
+    public static void subTypeViewer(String subType,double min){
         for(Activity act : activities) {
             switch (subType){
-                case 1:
-                    if(act.getDistance() > minDistance){
+                case "distance":
+                    if(act.getDistance() > min){
                         printFormatAct(act);
                     }
-                case 2:
-                    if(act.getDuration() > minDuration){
+                break;
+                case "duration":
+                    if(act.getDuration() > (int)min){
                         printFormatAct(act);
                     }
+                break;
             }
         }
     }
@@ -191,7 +193,6 @@ public class MainApp {
                         System.out.println("2 - Above a minimum distance");
                         System.out.println("3 - Type of energy expended");
                         System.out.println("4 - Above a minimum duration");
-                        System.out.println("5 - Activity type"); // possibly delete this?
                         System.out.println("0 - Back to Menu\n");
 
                         userInputNum = keyboard.nextInt();
@@ -208,22 +209,22 @@ public class MainApp {
                                 break;
                             case 2:
                                 System.out.println("Enter minimum distance: ");
-                                minDistance = keyboard.nextDouble();
+                                double minDistance = keyboard.nextDouble();
                                 printFbannerAct();
-                                subTypeViewer(1);
+                                subTypeViewer("distance",minDistance);
                                 break;
                             case 3:
                                 System.out.println("Enter type of energy");
-                                keyboard.nextLine(); //why?
+                                keyboard.nextLine();
                                 String choice = keyboard.nextLine();
                                 printFbannerAct();
                                 subTypeViewerEnergy(choice);
                             break;
                             case 4:
                                 System.out.println("Enter minimum duration: ");
-                                minDuration = keyboard.nextInt();
+                                int minDuration = keyboard.nextInt();
                                 printFbannerAct();
-                                subTypeViewer(2);
+                                subTypeViewer("duration",minDuration);
                             break;
                             case 0 : back = true;
                             break;
@@ -266,7 +267,6 @@ public class MainApp {
                     int avgBPM = keyboard.nextInt();
 
                     Activity ref = new Activity(type, duration, date, distance, avgBPM);
-//                    Activity ref = new Activity("Swimming", 103 , "08/01/2020",  6.00, 95); //for debug purposes
                     Collections.sort(activities);
                     int index = Collections.binarySearch(activities,ref);
 
