@@ -42,14 +42,12 @@ public class MainApp {
 
     }
 
-    public static void printFormatArrayList(){
-        for (Activity act: activities) {
-            printFormatAct(act);
-        }
+    public  static void printFbannerAct(){
+        System.out.printf("%-20s %4s %16s %9s %9s %n","Type","Date","Duration","Distance","Avg BPM");
     }
 
     public static void printFormatAct(Activity act){
-        System.out.printf("%-20s %5s %5d %5.2f %5d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
+        System.out.printf("%-20s %5s %5d %10.2f %8d %n",act.getType(),act.getDate(),act.getDuration(),act.getDistance(),act.getAverageHeartRate());
     }
 
 
@@ -59,7 +57,7 @@ public class MainApp {
             energy = str.replace(' ','_');
         }
         for(Activity act : activities) {
-            if(act.intensity.toString().equalsIgnoreCase(energy)) {
+            if(act.getIntensity().toString().equalsIgnoreCase(energy)) {
                 printFormatAct(act);
             }
         }
@@ -128,18 +126,19 @@ public class MainApp {
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("Please choose a file number");
+        try {
+            userInput = keyboard.nextLine();
+            reader.userChoice(userInput);
+        } catch (Exception e){
+            System.out.println(userInput + " is not a number, please try again.");
+        }
         do  {
-            try {
-                userInput = keyboard.nextLine();
-                reader.userChoice(userInput);
-            } catch (Exception e){
-                System.out.println(userInput + " is not a number, please try again.");
-            }
             System.out.println("Please choose what to do with the file:\n");
             System.out.println("1 - View activity");
             System.out.println("2 - View a subset of your activity");
             System.out.println("3 - View statistics");
-            System.out.println("0 - Exit\n");
+            System.out.println("4 - Find specific activity");
+            System.out.println("0 - exit\n");
 
             int userInputNum = keyboard.nextInt();
 
@@ -202,25 +201,28 @@ public class MainApp {
                                 System.out.println("1 - Swimming\n2 - Running\n3 - Cycling");
                                 int type = keyboard.nextInt();
                                 switch (type){
-                                    case 1 -> subTypeViewer("Swimming");
-                                    case 2 -> subTypeViewer("Running");
-                                    case 3 -> subTypeViewer("Cycling");
+                                    case 1 -> {printFbannerAct(); subTypeViewer("Swimming");}
+                                    case 2 -> {printFbannerAct();subTypeViewer("Running");}
+                                    case 3 -> {printFbannerAct();subTypeViewer("Cycling");}
                                 }
                                 break;
                             case 2:
                                 System.out.println("Enter minimum distance: ");
                                 minDistance = keyboard.nextDouble();
+                                printFbannerAct();
                                 subTypeViewer(1);
                                 break;
                             case 3:
                                 System.out.println("Enter type of energy");
                                 keyboard.nextLine();
                                 String choice = keyboard.nextLine();
+                                printFbannerAct();
                                 subTypeViewerEnergy(choice);
                             break;
                             case 4:
                                 System.out.println("Enter minimum duration: ");
                                 minDuration = keyboard.nextInt();
+                                printFbannerAct();
                                 subTypeViewer(2);
                             break;
                             case 0 : back = true;
@@ -249,6 +251,29 @@ public class MainApp {
                             System.out.println("You have burned " + avgCalories(activities) + " calories on average in this set.");
                         }
                 break;
+                case 4:
+                    System.out.println("Please enter the parameters of the activity");
+                    keyboard.nextLine();
+                    System.out.println("Type:");
+                    String type = keyboard.nextLine();
+                    System.out.println("Date:");
+                    String date = keyboard.nextLine();
+                    System.out.println("Duration");
+                    int duration = keyboard.nextInt();
+                    System.out.println("Distance");
+                    double distance = keyboard.nextDouble();
+                    System.out.println("Average Heart Rate");
+                    int avgBPM = keyboard.nextInt();
+
+                    Activity ref = new Activity(type, duration, date, distance, avgBPM);
+//                    Activity ref = new Activity("Swimming", 103 , "08/01/2020",  6.00, 95); //for debug purposes
+                    Collections.sort(activities);
+                    int index = Collections.binarySearch(activities,ref);
+
+                    printFormatAct(activities.get(index));
+                    System.out.println("\nCalories burned: "+activities.get(index).calcCaloriesBurned());
+                    System.out.println("Intensity: "+activities.get(index).getIntensity());
+                    break;
                 case 0:
                     exit = true;
                 break;

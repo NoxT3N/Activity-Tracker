@@ -4,12 +4,17 @@ public class Activity implements Comparable<Activity> {
     private String date;
     private double distance;
     private int averageHeartRate;
-    IntensityState intensity;
+    public IntensityState intensity;
     private double intensityValue;
 
     //constructors
     public Activity() {
     }
+
+//    public Activity(String type, String date) {
+//        this.type = type;
+//        this.date = date;
+//    }
 
     public Activity(String type, int duration, String date, double distance, int averageHeartRate) {
         this.type = type;
@@ -71,7 +76,6 @@ public class Activity implements Comparable<Activity> {
     
 
     public void calcIntensity(){
-        IntensityState intensity;
         double kph = distance/(Math.round((double)duration/60));
         double[] swimKPH ={0.5,1.25,2,2.75,3.5};
         double[] swimIntensity ={5,6.3,7.6,8.9,10.2};
@@ -102,23 +106,23 @@ public class Activity implements Comparable<Activity> {
 
         if(kph<choiceA[0]){
             intensityValue = choiceB[0];
-            intensity = IntensityState.VERY_LIGHT;
+            this.intensity = IntensityState.VERY_LIGHT;
         }
         else if(kph>choiceA[0]&& kph < choiceA[1]){
             intensityValue = choiceB[1];
-            intensity = IntensityState.LIGHT;
+            this.intensity = IntensityState.LIGHT;
         }
         else if(kph>choiceA[1]&& kph <choiceA[2]){
             intensityValue = choiceB[2];
-            intensity = IntensityState.MODERATE;
+            this.intensity = IntensityState.MODERATE;
         }
         else if(kph>choiceA[2]&& kph <choiceA[3]){
             intensityValue = choiceB[3];
-            intensity = IntensityState.VIGOROUS;
+            this.intensity = IntensityState.VIGOROUS;
         }
-        else if(kph>choiceA[3]&& kph <choiceA[4]){
+        else if(kph>choiceA[3]){
             intensityValue = choiceB[4];
-            intensity = IntensityState.VERY_VIGOROUS;
+            this.intensity = IntensityState.VERY_VIGOROUS;
         }
     }
 
