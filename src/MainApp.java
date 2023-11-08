@@ -1,5 +1,3 @@
-import java.lang.invoke.SwitchPoint;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -125,16 +123,17 @@ public class MainApp {
         int subType = 1;
         boolean exit = false;
         boolean back = false;
+        String userInput="-1";
 
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("Please choose a file number");
         do  {
             try {
-                reader.userInput = keyboard.nextLine();
-                reader.userChoice();
+                userInput = keyboard.nextLine();
+                reader.userChoice(userInput);
             } catch (Exception e){
-                System.out.println(reader.userInput + " is not a number, please try again.");
+                System.out.println(userInput + " is not a number, please try again.");
             }
             System.out.println("Please choose what to do with the file:\n");
             System.out.println("1 - View activity");
@@ -142,9 +141,9 @@ public class MainApp {
             System.out.println("3 - View statistics");
             System.out.println("0 - Exit\n");
 
-            int userInput = keyboard.nextInt();
+            int userInputNum = keyboard.nextInt();
 
-            switch(userInput){
+            switch(userInputNum){
                 case 1:
                     do{
                         System.out.println("Sort by: ");
@@ -155,29 +154,29 @@ public class MainApp {
                         System.out.println("5 - Distance");
                         System.out.println("0 - Back to Menu\n");
 
-                        userInput = keyboard.nextInt();
+                        userInputNum = keyboard.nextInt();
 
-                        switch(userInput){
+                        switch(userInputNum){
                             case 1 -> {sortBy(activities,"calories",false); displayAll();}
                             case 2 ->{
                                 System.out.println("\n1 - Ascending\n2 - Descending");
-                                userInput = keyboard.nextInt();
-                                boolean asc = userInput == 1;
+                                userInputNum = keyboard.nextInt();
+                                boolean asc = userInputNum == 1;
                                 sortBy(activities,"date",asc);
                                 displayAll();
                             }
                             case 3 -> {
                                 System.out.println("\n1 - Ascending\n2 - Descending");
-                                userInput = keyboard.nextInt();
-                                boolean asc = userInput == 1;
+                                userInputNum = keyboard.nextInt();
+                                boolean asc = userInputNum == 1;
                                 sortBy(activities,"duration",asc);
                                 displayAll();
                             }
                             case 4 -> {sortBy(activities,"type",false); displayAll();}
                             case 5 -> {
                                 System.out.println("\n1 - Ascending\n2 - Descending");
-                                userInput = keyboard.nextInt();
-                                boolean asc = userInput == 1;
+                                userInputNum = keyboard.nextInt();
+                                boolean asc = userInputNum == 1;
                                 sortBy(activities,"distance",asc);
                                 displayAll();
                             }
@@ -196,9 +195,9 @@ public class MainApp {
                         System.out.println("5 - Activity type");
                         System.out.println("0 - Back to Menu\n");
 
-                        userInput = keyboard.nextInt();
+                        userInputNum = keyboard.nextInt();
 
-                        switch (userInput){
+                        switch (userInputNum){
                             case 1 :
                                 System.out.println("1 - Swimming\n2 - Running\n3 - Cycling");
                                 int type = keyboard.nextInt();

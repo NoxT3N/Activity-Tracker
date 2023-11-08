@@ -8,7 +8,7 @@ public class activityReader {
     private String filename;
     private File actFolder = new File("src/activities");
     private File[] listOfFiles = actFolder.listFiles();
-    public String userInput = "-1";
+//    public String userInput = "-1";
     public ArrayList<Activity> activitiesList = new ArrayList<>();
 
     // fileList runs through the contents of the 'activities' folder and prints them out, which is where csv files are stored.
@@ -50,7 +50,7 @@ public class activityReader {
 //        activity();
 //    }
 
-    public void userChoice () {
+    public void userChoice (String userInput) {
         int choice = Integer.parseInt(userInput);
 
         do  {
